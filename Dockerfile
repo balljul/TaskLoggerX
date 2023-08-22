@@ -1,22 +1,21 @@
-# Use the official Python image as a base image
-FROM python:3.9
+#Deriving the latest base image
+FROM python:latest
 
-# Set the working directory in the container
-WORKDIR /app
 
-# Copy the requirements file into the container
-COPY ./src/requirements.txt /app/
+#Labels as key value pair
+LABEL Maintainer="Julius Ball"
 
-# Install the Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Any working directory can be chosen as per choice like '/' or '/home' etc
+# i have chosen /usr/app/src
+WORKDIR /usr/app/src
 
-# Copy the rest of the application code into the container
-COPY ./src /app/
+#to COPY the remote file at working directory in container
+COPY main.py ./
+# Now the structure looks like this '/usr/app/src/test.py'
 
-# Set environment variables if needed
-ENV DB_HOST=mysql
-ENV DB_PORT=3306
-# ... other environment variables
 
-# Command to run your Python application
-CMD ["python", "main.py"]
+#CMD instruction should be used to run the software
+#contained by your image, along with any arguments.
+
+CMD [ "python", "./main.py"]
+
