@@ -1,5 +1,7 @@
 import argparse
 
+print('Docker Container is running')
+
 
 # General Information
 
@@ -17,4 +19,3 @@ parser.add_argument(
 )
 
 print(parser.parse_args())
-

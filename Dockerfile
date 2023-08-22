@@ -1,21 +1,17 @@
-#Deriving the latest base image
+# Use the official Python image as a base image
 FROM python:latest
 
+# Set the working directory in the container
+WORKDIR /usr/app/src
 
-#Labels as key value pair
-LABEL Maintainer="Julius Ball"
+# Copy the requirements file into the container
+COPY app/requirements.txt /app/src/
 
-# Any working directory can be chosen as per choice like '/' or '/home' etc
-# i have chosen /usr/app/src
-WORKDIR /
+# # Install the Python dependencies
+# RUN pip install --no-cache-dir -r requirements.txt
 
-#to COPY the remote file at working directory in container
-COPY main.py ./
-# Now the structure looks like this '/usr/app/src/test.py'
+# Copy the rest of the application code into the container
+COPY app/main.py ./
 
-
-#CMD instruction should be used to run the software
-#contained by your image, along with any arguments.
-
-CMD [ "python", " ./main.py"]
-
+# Command to run your Python application
+CMD ["python", "main.py"]
