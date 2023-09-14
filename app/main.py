@@ -1,26 +1,30 @@
 import argparse
+from time import localtime, gmtime, strftime
 
 # General Information
-
 parser = argparse.ArgumentParser(prog='TaskLoggerX', description='A dockerized Phyton CLI Tool to track and manage your tasks')
 
-# Commands
-
+# Arguments
 parser.add_argument('tlx')
-# parser.add_argument('tlx', choices=['start', 'end', 'description'], help='Available commands: start, end, description')
 parser.add_argument('-s', '--start', action='store_true')
 parser.add_argument('-e', '--end', action='store_true')
 parser.add_argument('-d', '--description', action='store_true')
+parser.add_argument('-ct', '--current-time', action='store_true', dest='show_time', help='Gives you the current CET and UTC Timestamp')
 
 args = parser.parse_args()
 
-if args.start == True and args.end == True:
-    print('Set start and end to true')
-elif args.start == True:
-   print('Set start to true')
-elif args.end == True:
-   print('Set end to true')
-elif args.description == True:
-    print("TaskLoggerX: A dockerized Phyton CLI Tool to track and manage your tasks")
-else:
-    print('No command was given')
+
+# Logic
+
+class Color:
+	RED = '\033[91m'
+	GREEN = '\033[92m'
+	YELLOW = '\033[93m'
+	RESET = '\033[0m'
+
+if args.show_time:
+	current_cet_timestamp = strftime("%a, %d %b %Y %H:%M:%S", localtime())
+	current_utc_timestamp = strftime("%a, %d %b %Y %H:%M:%S", gmtime())
+
+	print(f"{Color.GREEN}CET Timestamp:{Color.RESET} {current_cet_timestamp}")
+	print(f"{Color.YELLOW}UTC Timestamp:{Color.RESET} {current_utc_timestamp}")
