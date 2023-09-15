@@ -22,10 +22,7 @@ class Color:
 	YELLOW = '\033[93m'
 	RESET = '\033[0m'
 
-tf=open("worktime.txt","r+")
 
-timedata=tf.readlines()
-timedata_len=len(timedata)
 
 if args.show_time:
 	current_cet_timestamp = strftime("%a, %d %b %Y %H:%M:%S", localtime())
@@ -35,6 +32,9 @@ if args.show_time:
 	print(f"{Color.YELLOW}UTC Timestamp:{Color.RESET} {current_utc_timestamp}")
 
 if args.start != None and args.stop != None:
+	tf=open("./worktime.txt","r+")
+	timedata=tf.readlines()
+	timedata_len=len(timedata)
 	tf.write(args.start + " | " + args.stop + "\n")
 elif args.start != None:
 	print(args.start)
