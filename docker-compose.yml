@@ -2,15 +2,6 @@ version: '3'
 
 services:
 
-  # Phyton Service
-  # tasklogger:
-    # build:
-    #   context: .
-    #   dockerfile: Dockerfile
-    # volumes:
-    #   - ./src:/app
-
-  # MySql Container
   tasklogger_db:
     image: mysql:5.7.32
     container_name: tasklogger_db
@@ -24,8 +15,8 @@ services:
       SERVICE_TAGS: dev
       SERVICE_NAME: tasklogger_db
     volumes:
-      - taskloggerData:/var/lib/mysql/
+      - dbdata:/var/lib/mysql/
 
-  volumes:
-    taskloggerData:
-      driver: local
+volumes:
+  dbdata:
+    driver: local
