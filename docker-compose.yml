@@ -3,9 +3,29 @@ version: '3'
 services:
 
   # Phyton Service
-  tasklogger:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  # tasklogger:
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    # volumes:
+    #   - ./src:/app
+
+  # MySql Container
+  tasklogger_db:
+    image: mysql:5.7.32
+    container_name: tasklogger_db
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+      - "3307:3307"
+    environment:
+      MYSQL_DATABASE:  tasklogger_db
+      MYSQL_ROOT_PASSWORD: password
+      SERVICE_TAGS: dev
+      SERVICE_NAME: tasklogger_db
     volumes:
-      - ./src:/app
+      - taskloggerData:/var/lib/mysql/
+
+  volumes:
+    taskloggerData:
+      driver: local
