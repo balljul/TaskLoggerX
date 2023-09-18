@@ -6,7 +6,7 @@ import tlx_clock
 
 if arguments.args.dbshow:
 	database.show_tables()
- 
+
 if arguments.args.dbmigrate:
 	confirmation = input("Valuable Data could be lost. Are you sure? (Y/N): ")
 
@@ -35,7 +35,11 @@ if arguments.args.show_time:
 	tlx_clock.output_ct_timestamps()
 
 if arguments.args.start != None and arguments.args.stop != None:
-	database.submit_worktime(arguments.args.start, arguments.args.stop)
+	if arguments.args.description != None:
+		database.submit_worktime(arguments.args.start, arguments.args.stop, arguments.args.description)
+	else:
+		database.submit_worktime(arguments.args.start, arguments.args.stop, "")
+
 elif arguments.args.start != None:
 	print(arguments.args.start)
 	print('Didn´t enter an end value')
