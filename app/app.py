@@ -1,11 +1,13 @@
 import arguments
 import database
+from migrations import taskLoggerMigrations
 import tlx_clock
 
 # DB Logic
 
 if arguments.args.dbshow:
 	database.show_tables()
+	taskLoggerMigrations.test()
 
 if arguments.args.dbmigrate:
 	confirmation = input("Valuable Data could be lost. Are you sure? (Y/N): ")
