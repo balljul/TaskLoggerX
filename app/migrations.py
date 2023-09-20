@@ -2,16 +2,19 @@ import mysql.connector
 from tlx_cnf import db_cnf
 # Migrations for TaskLoggerX
 class taskLoggerMigrations:
-	def __inti__(self, host, user, password, database):
+	def __init__(self, host = db_cnf.HOST, user = db_cnf.USER, password = db_cnf.PASSWORD, database = db_cnf.DATABASE):
 		self.conn = mysql.connector.connect(
 			host=host,
 			user=user,
 			password=password,
 			database=database
 		)
-		self.cusor = slef.conn.cursor()
-	def test:
-		print(db_cnf.host())
+		self.cursor = self.conn.cursor()
+	def drop_shema(self):
+		drop_tables = """
+		DROP TABLE IF EXISTS worktime, task, status, worktime_task, status_task, status_worktime;
+		"""
+		self.cursor.execute(drop_tables)
 	def create_tables(self):
 		table_worktime = """
 		CREATE TABLE IF NOT EXISTS worktime (
@@ -37,18 +40,20 @@ class taskLoggerMigrations:
 			description VARCHAR(255)
 		)
 		"""
-
 		status_worktime_table = """
-		CREATE TABLE IF NOT EXISTS status_worktime
-			FOREIGN KEY (status_id) REFERENCES status(id)
-			FOREIGN KEY (worktime_id) REFERENCES worktime(id)
+		CREATE TABLE IF NOT EXISTS status_worktime (
+		    status_id INT,
+		    worktime_id INT,
+		    FOREIGN KEY (status_id) REFERENCES status(id),
+		    FOREIGN KEY (worktime_id) REFERENCES worktime(id)
 		)
 		"""
 
-
 		worktime_task_table = """
-		CREATE TABLE IF NOT EXISTS worktime_task
-			FOREIGN KEY (worktime_id) REFERENCES worktime(id)
+		CREATE TABLE IF NOT EXISTS worktime_task (
+			worktime_id INT,
+			task_id INT,
+			FOREIGN KEY (worktime_id) REFERENCES worktime(id),
 			FOREIGN KEY (task_id) REFERENCES task(id)
 		)
 		"""
@@ -56,7 +61,9 @@ class taskLoggerMigrations:
 
 		status_task_table = """
 		CREATE TABLE IF NOT EXISTS status_task (
-			FOREIGN KEY (status_id) REFERENCES status(id)
+			status_id INT,
+			task_id INT,
+			FOREIGN KEY (status_id) REFERENCES status(id),
 			FOREIGN KEY (task_id) REFERENCES task(id)
 		)
 		"""
