@@ -11,7 +11,7 @@ if arguments.args.dbshow:
 	database.show_tables()
 
 if arguments.args.dbmigrate:
-	confirmation = input("Valuable Data could be lost. Are you sure? (Y/N): ")
+	confirmation = input("Valuable Data could be lost. Are you sure? (Y/n): ")
 
 	if confirmation == "Y":
 		migrations.create_tables()
@@ -21,7 +21,7 @@ if arguments.args.dbmigrate:
 		print("Please enter N(no) or Y(yes)")
 
 if arguments.args.dbdrop:
-	confirmation = input("Valuable Data could be lost. Are you sure? (Y/N): ")
+	confirmation = input("Valuable Data could be lost. Are you sure? (Y/n): ")
 
 	if confirmation == "Y":
 		migrations.drop_shema()
