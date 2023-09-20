@@ -5,25 +5,27 @@ import tlx_clock
 
 # DB Logic
 
+migrations = taskLoggerMigrations()
+
 if arguments.args.dbshow:
 	database.show_tables()
-	taskLoggerMigrations.test()
 
 if arguments.args.dbmigrate:
 	confirmation = input("Valuable Data could be lost. Are you sure? (Y/N): ")
 
 	if confirmation == "Y":
-		database.migrate_database()
+		migrations.create_tables()
 	elif confirmation == "N":
 		print("Migration cancelled")
 	else:
 		print("Please enter N(no) or Y(yes)")
 
-if arguments.args.dbdelete:
+if arguments.args.dbdrop:
 	confirmation = input("Valuable Data could be lost. Are you sure? (Y/N): ")
 
 	if confirmation == "Y":
-		database.drop_worktime_table()
+		migrations.drop_shema()
+		print("Shema was dropped")
 	elif confirmation == "N":
 		print("Database Deletion cancelled")
 	else:

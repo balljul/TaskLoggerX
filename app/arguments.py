@@ -12,6 +12,6 @@ parser.add_argument('-d', '--description', action="store", dest='description', h
 
 parser.add_argument('-dbs', '--database-show', action='store_true', dest='dbshow',  help='Shows all tables in the database')
 parser.add_argument('--database-migrate', action='store_true', dest='dbmigrate', help='Migrates the database')
-parser.add_argument('--database-delete', action='store_true', dest='dbdelete', help='A quick way to drop all tables in the database')
+parser.add_argument('--database-drop', action='store_true', dest='dbdrop', help='A quick way to drop all tables in the database')
 
 args = parser.parse_args()
