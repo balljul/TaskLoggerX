@@ -1,3 +1,4 @@
+#! /usr/bin/env python3
 import arguments
 import database
 from migrations import taskLoggerMigrations
