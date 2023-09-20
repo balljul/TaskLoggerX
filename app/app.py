@@ -2,11 +2,13 @@
 import arguments
 import database
 from migrations import taskLoggerMigrations
+from seeder import taskLoggerSeeders
 import tlx_clock
 
 # DB Logic
 
 migrations = taskLoggerMigrations()
+seeders = taskLoggerSeeders()
 
 if arguments.args.dbshow:
 	database.show_tables()
@@ -32,7 +34,9 @@ if arguments.args.dbdrop:
 	else:
 		print("Please enter N(no) or Y(yes)")
 
-
+if arguments.args.dbseed:
+	seeders.seed_tables()
+	print("Database succesfully seeded")
 
 
 
