@@ -17,6 +17,23 @@ services:
     volumes:
       - dbdata:/var/lib/mysql/
 
+  tasklogger_backup_db:
+    image: mysql:5.7.32
+    container_name: tasklogger_backup_db
+    restart: unless-stopped
+    ports:
+      - "3309:3309"
+      - "3310:3310"
+    environment:
+      MYSQL_DATABASE:  tasklogger_backup_db
+      MYSQL_ROOT_PASSWORD: password
+      SERVICE_TAGS: dev
+      SERVICE_NAME: tasklogger_backup_db
+    volumes:
+      - dbdataBackup:/var/lib/mysql/
+
 volumes:
   dbdata:
+    driver: local
+  dbdataBackup:
     driver: local
