@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 import arguments
-import database
+from database import taskLoggerDb
 from migrations import taskLoggerMigrations
 from seeder import taskLoggerSeeders
 import tlx_clock
@@ -9,6 +9,7 @@ import tlx_clock
 
 migrations = taskLoggerMigrations()
 seeders = taskLoggerSeeders()
+database = taskLoggerDb()
 
 if arguments.args.dbshow:
 	database.show_tables()
