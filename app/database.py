@@ -1,5 +1,5 @@
 import mysql.connector
-from tlx_cnf import db_cnf
+from tlx_cnf import db_cnf, Color
 from datetime import datetime, timedelta
 
 class taskLoggerDb:
@@ -31,5 +31,26 @@ class taskLoggerDb:
 		self.conn.commit()
 		print("Succesfully saved worktime")
 
-	def create_task(self):
-		print("This function creates Tasks")
+	def create_task(self, name, description):
+		insert_statement = (
+		"INSERT INTO task (name, description)"
+		"VALUES (%s, %s)"
+		)
+
+		data = (name, description)
+		self.cursor.execute(insert_statement, data)
+		self.conn.commit()
+		print("Succesfully created task")
+
+	def list_task(self):
+		query = (
+		"SELECT * FROM task"
+		)
+
+		self.cursor.execute(query)
+		for i in self.cursor:
+			if i[2] != None:
+				print(f"{Color.RED}ID: {Color.RESET}{i[0]}  {Color.GREEN}Name: {Color.RESET}{i[1]}  {Color.YELLOW}Description: {Color.RESET}{i[2]} " + "\n")
+			else:
+				print(f"{Color.RED}ID: {Color.RESET}{i[0]}  {Color.GREEN}Name: {Color.RESET}{i[1]}" + "\n")
+
