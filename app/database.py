@@ -22,10 +22,14 @@ class taskLoggerDb:
 		"INSERT INTO worktime (starttime, endtime, description)"
 		"VALUES (%s, %s, %s)"
 		)
+
 		starttime = datetime.now().replace(hour = start, minute = 0, second = 0)
 		endtime = datetime.now().replace(hour = stop, minute = 0, second = 0)
+
 		data=(starttime, endtime, description)
 		self.cursor.execute(insert_statement, data)
 		self.conn.commit()
 		print("Succesfully saved worktime")
 
+	def create_task(self):
+		print("This function creates Tasks")

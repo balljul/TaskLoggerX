@@ -46,6 +46,7 @@ if arguments.args.show_time:
 
 if arguments.args.start != None and arguments.args.stop != None:
 	if arguments.args.description != None:
+		print(arguments.args.description)
 		database.submit_worktime(arguments.args.start, arguments.args.stop, arguments.args.description)
 	else:
 		database.submit_worktime(arguments.args.start, arguments.args.stop, "")
