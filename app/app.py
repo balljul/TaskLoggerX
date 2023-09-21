@@ -36,6 +36,7 @@ if arguments.args.dbdrop:
 
 if arguments.args.dbseed:
 	seeders.seed_tables()
+	seeders.seed_tasks()
 	print("Database succesfully seeded")
 
 
