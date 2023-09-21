@@ -71,6 +71,5 @@ if arguments.args.task:
 	if arguments.args.create:
 		if arguments.args.name:
 			database.create_task(arguments.args.name, arguments.args.description)
-			print("Task succesfully created")
 	if arguments.args.list:
 		database.list_task()
