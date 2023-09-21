@@ -16,7 +16,7 @@ parser.add_argument('-c', '--create', action='store_true', dest='create', help='
 parser.add_argument('-n', '--name', action='store', dest='name', help='Set a name')
 
 
-parser.add_argument('-dbs', '--database-show', action='store_true', dest='dbshow',  help='Shows all tables in the database')
+parser.add_argument('--database-show', action='store_true', dest='dbshow',  help='Shows all tables in the database')
 parser.add_argument('--database-migrate', action='store_true', dest='dbmigrate', help='Migrates the database')
 parser.add_argument('--database-drop', action='store_true', dest='dbdrop', help='A quick way to drop all tables in the database')
 parser.add_argument('--database-seed', action='store_true', dest='dbseed', help='Seeds the database')

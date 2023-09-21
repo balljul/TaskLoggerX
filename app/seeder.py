@@ -19,3 +19,10 @@ class taskLoggerSeeders:
 			self.cursor.execute(status_seeder_query, (status[0], status[1]))
 			self.conn.commit()
 
+	def seed_task(self):
+		tasks = [["work", "Task for all work-related things"], ["privat", "Task for all privat things"], ["other", "Task every other things"]]
+		task_seeder_query = "INSERT INTO task (name, description) VALUES (%s, %s)"
+
+		for task in tasks:
+			self.cursor.execute(task_seeder_query, (task[0], task[1]))
+			self.conn.commit()
