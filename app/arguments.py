@@ -11,10 +11,10 @@ parser.add_argument('--current-time', action='store_true', dest='show_time', hel
 parser.add_argument('-d', '--description', action="store", dest='description', help='Lets you add a description')
 parser.add_argument('-l', '--list', action="store_true", dest='list', help='List entries')
 
-parser.add_argument('-t', '--task-create', action='store_true', dest='task', help='Create a task')
+parser.add_argument('-t', '--task', action='store_true', dest='task', help='Create a task')
 parser.add_argument('-c', '--create', action='store_true', dest='create', help='Create Mode')
 parser.add_argument('-n', '--name', action='store', dest='name', help='Set a name')
-
+parser.add_argument('-a', '--append', action='store', dest='append', help=argparse.SUPPRESS )
 
 parser.add_argument('--database-show', action='store_true', dest='dbshow',  help='Shows all tables in the database')
 parser.add_argument('--database-migrate', action='store_true', dest='dbmigrate', help='Migrates the database')
