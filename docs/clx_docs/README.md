@@ -1,1 +1,1 @@
-# CLX Module Documentation
+# Clock Module Documentation
