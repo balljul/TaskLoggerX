@@ -12,7 +12,6 @@ seeders = taskLoggerSeeders()
 database = taskLoggerDb()
 
 # dlx Module
-
 if arguments.args.dbshow:
 	database.show_tables()
 
@@ -52,11 +51,11 @@ if arguments.args.show_time:
 # wlx Module
 
 if arguments.args.start != None and arguments.args.stop != None:
-	if arguments.args.description != None:
-		print(arguments.args.description)
-		database.submit_worktime(arguments.args.start, arguments.args.stop, arguments.args.description)
-	else:
-		database.submit_worktime(arguments.args.start, arguments.args.stop, "")
+	description = arguments.args.description if arguments.args.description != None else ""
+	task = arguments.args.append if arguments.args.append != None else ""
+
+	database.submit_worktime(arguments.args.start, arguments.args.stop, description, task)
+
 elif arguments.args.start != None:
 	print(arguments.args.start)
 	print('Didn´t enter an end value')
@@ -73,3 +72,4 @@ if arguments.args.task:
 			database.create_task(arguments.args.name, arguments.args.description)
 	if arguments.args.list:
 		database.list_task()
+
