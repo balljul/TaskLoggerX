@@ -1,9 +1,9 @@
-#! /usr/bin/env python3
 import arguments
 from database import taskLoggerDb
 from migrations import taskLoggerMigrations
 from seeder import taskLoggerSeeders
 import tlx_clock
+import math
 
 # DB Logic
 
