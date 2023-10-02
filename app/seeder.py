@@ -12,7 +12,7 @@ class taskLoggerSeeders:
 		self.cursor = self.conn.cursor()
 
 	def seed_tables(self):
-		statuses = [["active", "Task/Worktime Entry is active"], ["descarded", "Task/Worktime Entry is descarded"], ["outdated", "Task/Worktime is outdated"]]
+		statuses = [["active", "Task/Worktime Entry is active"], ["descarded", "Task/Worktime Entry is descarded"], ["outdated", "Task/Worktime is outdated"], ["draft", "This is still a draft"]]
 		status_seeder_query = "INSERT INTO status (name, description) VALUES (%s, %s)"
 
 		for status in statuses:
