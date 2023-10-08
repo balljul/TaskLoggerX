@@ -1,25 +1,56 @@
 import mysql.connector
+from tlx_cnf import db_cnf, Color
+from datetime import datetime, timedelta
 
-tlxdb = mysql.connector.connect(
-	host = '127.0.0.1',
-	user = 'tlx_user',
-	password = 'tlx123',
-	database = 'tasklogger_db'
-)
+class taskLoggerDb:
+	def __init__(self, host = db_cnf.HOST, user = db_cnf.USER, password = db_cnf.PASSWORD, database = db_cnf.DATABASE):
+		self.conn = mysql.connector.connect(
+			host = host,
+			user = user,
+			password = password,
+			database = database
+		)
+		self.cursor = self.conn.cursor()
 
-tlx_cursor = tlxdb.cursor()
+	def show_tables(self):
+	    self.cursor.execute("SHOW TABLES;")
+	    for x in self.cursor:
+	        print(x)
 
-def show_tables():
-    tlx_cursor.execute("SHOW TABLES;")
-    for x in tlx_cursor:
-        print(x)
+	def submit_worktime(self, start, stop, description):
+		insert_statement = (
+		"INSERT INTO worktime (starttime, endtime, description)"
+		"VALUES (%s, %s, %s)"
+		)
 
-def submit_worktime(starttime, endtime, description):
-    insert_statement = (
-	"INSERT INTO worktime (starttime, endtime, description)"
-	"VALUES (%s, %s, %s)"
-	)
-    data=(starttime, endtime, description)
-    tlx_cursor.execute(insert_statement, data)
-    tlxdb.commit()
-    print("Succesfully saved worktime")
+		starttime = datetime.now().replace(hour = start, minute = 0, second = 0)
+		endtime = datetime.now().replace(hour = stop, minute = 0, second = 0)
+
+		data=(starttime, endtime, description)
+		self.cursor.execute(insert_statement, data)
+		self.conn.commit()
+		print("Succesfully saved worktime")
+
+	def create_task(self, name, description):
+		insert_statement = (
+		"INSERT INTO task (name, description)"
+		"VALUES (%s, %s)"
+		)
+
+		data = (name, description)
+		self.cursor.execute(insert_statement, data)
+		self.conn.commit()
+		print("Succesfully created task")
+
+	def list_task(self):
+		query = (
+		"SELECT * FROM task"
+		)
+
+		self.cursor.execute(query)
+		for i in self.cursor:
+			if i[2] != None:
+				print(f"{Color.RED}ID: {Color.RESET}{i[0]}  {Color.GREEN}Name: {Color.RESET}{i[1]}  {Color.YELLOW}Description: {Color.RESET}{i[2]} " + "\n")
+			else:
+				print(f"{Color.RED}ID: {Color.RESET}{i[0]}  {Color.GREEN}Name: {Color.RESET}{i[1]}" + "\n")
+

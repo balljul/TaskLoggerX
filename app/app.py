@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 import arguments
-import database
+from database import taskLoggerDb
 from migrations import taskLoggerMigrations
 from seeder import taskLoggerSeeders
 import tlx_clock
@@ -9,6 +9,9 @@ import tlx_clock
 
 migrations = taskLoggerMigrations()
 seeders = taskLoggerSeeders()
+database = taskLoggerDb()
+
+# dlx Module
 
 if arguments.args.dbshow:
 	database.show_tables()
@@ -40,19 +43,34 @@ if arguments.args.dbseed:
 	print("Database succesfully seeded")
 
 
+# Clock Module
 
 if arguments.args.show_time:
 	tlx_clock.output_ct_timestamps()
 
+
+# wlx Module
+
 if arguments.args.start != None and arguments.args.stop != None:
 	if arguments.args.description != None:
+		print(arguments.args.description)
 		database.submit_worktime(arguments.args.start, arguments.args.stop, arguments.args.description)
 	else:
 		database.submit_worktime(arguments.args.start, arguments.args.stop, "")
-
 elif arguments.args.start != None:
 	print(arguments.args.start)
 	print('Didn´t enter an end value')
 elif arguments.args.stop != None:
 	print(arguments.args.stop)
 	print("Didnt enter a start value")
+
+
+# tlx Module
+
+if arguments.args.task:
+	if arguments.args.create:
+		if arguments.args.name:
+			database.create_task(arguments.args.name, arguments.args.description)
+			print("Task succesfully created")
+	if arguments.args.list:
+		database.list_task()
