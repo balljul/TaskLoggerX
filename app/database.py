@@ -2,6 +2,7 @@ import mysql.connector
 from tlx_cnf import db_cnf, Color
 from datetime import datetime
 
+
 class taskLoggerDb:
     def __init__(self, host=db_cnf.HOST, user=db_cnf.USER, password=db_cnf.PASSWORD, database=db_cnf.DATABASE):
         self.conn=mysql.connector.connect(
@@ -33,7 +34,7 @@ class taskLoggerDb:
         # worktime table
         starttime = datetime.now().replace(hour = start, minute = 0, second = 0)
         endtime = datetime.now().replace(hour = stop, minute = 0, second = 0)
-        data=(starttime, endtime, description)
+        data = (starttime, endtime, description)
         self.cursor.execute(insert_statement, data)
         self.conn.commit()
         worktime_id = self.cursor.lastrowid
@@ -42,7 +43,7 @@ class taskLoggerDb:
         self.cursor.execute(get_task_id_statement, (task,))
         task_id = self.cursor.fetchone()
 
-        self.cursor.execute(insert_statement_task, (worktime_id, task_id[0]))
+        self.cursor.execute(insert_statement_task, (worktime_id, task_id))
         self.conn.commit()
         print("Succesfully saved worktime")
 
@@ -65,7 +66,6 @@ class taskLoggerDb:
 
         print(data)
 
-
     def list_task(self):
         query = (
                 "SELECT * FROM task"
@@ -77,4 +77,3 @@ class taskLoggerDb:
                 print(f"{Color.RED}ID: {Color.RESET}{i[0]}  {Color.GREEN}Name: {Color.RESET}{i[1]}  {Color.YELLOW}Description: {Color.RESET}{i[2]} " + "\n")
             else:
                 print(f"{Color.RED}ID: {Color.RESET}{i[0]}  {Color.GREEN}Name: {Color.RESET}{i[1]}" + "\n")
-
