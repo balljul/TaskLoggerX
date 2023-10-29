@@ -11,7 +11,8 @@ parser.add_argument('--current-time', action='store_true', dest='show_time', hel
 parser.add_argument('-d', '--description', action="store", dest='description', help='Lets you add a description')
 parser.add_argument('-l', '--list', action="store_true", dest='list', help='List entries')
 
-parser.add_argument('-t', '--task', action='store_true', dest='task', help='Create a task')
+parser.add_argument('-w', '--worktime', action='store_true', dest='worktime', help="For addressing worktime")
+parser.add_argument('-t', '--task', action='store_true', dest='task', help='For addressing tasks')
 parser.add_argument('-c', '--create', action='store_true', dest='create', help='Create Mode')
 parser.add_argument('-n', '--name', action='store', dest='name', help='Set a name')
 parser.add_argument('-a', '--append', action='store', dest='append', help=argparse.SUPPRESS )
