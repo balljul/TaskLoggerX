@@ -13,39 +13,38 @@ database = taskLoggerDb()
 
 # dlx Module
 if arguments.args.dbshow:
-	database.show_tables()
+    database.show_tables()
 
 if arguments.args.dbmigrate:
-	confirmation = input("Valuable Data could be lost. Are you sure? (Y/n): ")
-
-	if confirmation == "Y":
-		migrations.create_tables()
-	elif confirmation == "N":
-		print("Migration cancelled")
-	else:
-		print("Please enter N(no) or Y(yes)")
+    confirmation = input("Valuable Data could be lost. Are you sure? (Y/n): ")
+    if confirmation == "Y":
+        migrations.create_tables()
+    elif confirmation == "N":
+        print("Migration cancelled")
+    else:
+        print("Please enter N(no) or Y(yes)")
 
 if arguments.args.dbdrop:
-	confirmation = input("Valuable Data could be lost. Are you sure? (Y/n): ")
+    confirmation = input("Valuable Data could be lost. Are you sure? (Y/n): ")
 
-	if confirmation == "Y":
-		migrations.drop_shema()
-		print("Shema was dropped")
-	elif confirmation == "N":
-		print("Database Deletion cancelled")
-	else:
-		print("Please enter N(no) or Y(yes)")
+    if confirmation == "Y":
+        migrations.drop_shema()
+        print("Shema was dropped")
+    elif confirmation == "N":
+        print("Database Deletion cancelled")
+    else:
+        print("Please enter N(no) or Y(yes)")
 
 if arguments.args.dbseed:
-	seeders.seed_tables()
-	seeders.seed_tasks()
-	print("Database succesfully seeded")
+    seeders.seed_tables()
+    seeders.seed_tasks()
+    print("Database succesfully seeded")
 
 
 # Clock Module
 
 if arguments.args.show_time:
-	tlx_clock.output_ct_timestamps()
+    tlx_clock.output_ct_timestamps()
 
 
 # wlx Module
@@ -56,10 +55,10 @@ if arguments.args.start != None and arguments.args.stop != None:
 
 	database.submit_worktime(arguments.args.start, arguments.args.stop, description, task)
 
-elif arguments.args.start != None:
+elif arguments.args.start:
 	print(arguments.args.start)
 	print('Didn´t enter an end value')
-elif arguments.args.stop != None:
+elif arguments.args.stop:
 	print(arguments.args.stop)
 	print("Didnt enter a start value")
 
