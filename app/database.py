@@ -73,7 +73,7 @@ class taskLoggerDb:
         self.cursor.execute(query)
 
         for i in self.cursor:
-            if i[2] != None:
+            if i[2]:
                 print(f"{Color.RED}ID: {Color.RESET}{i[0]}  {Color.GREEN}Name: {Color.RESET}{i[1]}  {Color.YELLOW}Description: {Color.RESET}{i[2]} " + "\n")
             else:
                 print(f"{Color.RED}ID: {Color.RESET}{i[0]}  {Color.GREEN}Name: {Color.RESET}{i[1]}" + "\n")
