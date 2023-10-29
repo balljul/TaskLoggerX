@@ -69,6 +69,13 @@ if arguments.args.task:
 	if arguments.args.create:
 		if arguments.args.name:
 			database.create_task(arguments.args.name, arguments.args.description)
-	if arguments.args.list:
-		database.list_task()
 
+
+# List option
+if arguments.args.list:
+    if arguments.args.task:
+        database.list_task()
+    elif arguments.args.worktime:
+        print("Listings for worktime will be implemented soon....")
+    else:
+        print("Listings for everything will be implemented soon....")
