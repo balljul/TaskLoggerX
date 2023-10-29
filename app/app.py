@@ -74,8 +74,14 @@ if arguments.args.task:
 # List option
 if arguments.args.list:
     if arguments.args.task:
+        print("YOUR TASKS: \n")
         database.list_task()
     elif arguments.args.worktime:
-        print("Listings for worktime will be implemented soon....")
+        print("YOUR WOKRTIMES: \n")
+        database.list_worktime()
     else:
-        print("Listings for everything will be implemented soon....")
+        print("YOUR TASKS: \n")
+        database.list_task()
+        print("YOUR WOKRTIMES: \n")
+        database.list_worktime()
+
